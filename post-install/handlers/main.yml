@@ -1,2 +1,20 @@
 ---
 # handlers file for post-install
+- name: Restart NTP service on CentOS
+  service:
+    name: chronyd
+    state: restarted
+    enabled: yes
+   when: ansible_distribution == "CentOS"
+
+- name: Restart NTP Service on Ubuntu
+  service:
+    name: ntp
+    state: restarted
+    enabled: yes
+   when: ansible_distribution == "Ubuntu"
+- name: Dump File
+  copy:
+    src: files/myfile.txt
+    dest: /tmp/myfile.txt
+
